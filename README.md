@@ -1,165 +1,72 @@
-# 📚 Avaliação DW3 - MiniDevBlog React + Firebase + Deploy [Nunca se Esqueça de Montar a Build Final do Deploy]
+# 📚 Avaliação DW3 - MiniDevBlog
 
-## 🏛️ Contextualização
+## 🏛️ Sobre o Projeto
 
-"Nos bons tempos", o desenvolvedor que sabia organizar rotas, proteger páginas e ainda subir uma aplicação pública era considerado digno da espada de um verdadeiro arquiteto de sistemas. Hoje, você terá essa oportunidade.
-
-Você irá concluir a construção de um **Mini DevBlog** utilizando **React**, **Firebase Authentication** e **Deploy Automatizado**, tomando como base:
-
-> 🔗 [Repositório Inicial (Incompleto) - avalicao-lifedev](https://github.com/victoricoma/avaliacao-lifedev.git)
-
-Inspirando-se na estrutura de:
-
-> 🔗 [Exemplo Estruturado - dw3_react_minidevblog](https://github.com/victoricoma/dw3_react_minidevblog)
+Este projeto doi desenvolvido como parte de uma avaliação da disciplina **Desenvolvimento Web 3**. A proposta era criar um blog funcional e moderno com **React.js** e **Firebase**, permitindo autenticação segura, criação de postagens e uma navegação fluida e responsiva.
 
 ---
 
-## 🛠️ Tarefas a serem realizadas
-
-### 1. Preparação do Ambiente
-
-- Faça o **fork** do repositório de avaliação.
-- Crie uma **branch** chamada:  
-  `avaliacaodw-seulogindogithub`
-- Exemplo: `avaliacaodw-joaosilva`
-
----
-
-### 2. Construção de Rotas Principais
-
-Implemente as seguintes **rotas** usando `react-router-dom`:
-
-| Rota | Função | Proteção |
-|:----|:------|:------|
-| `/login` | Página de login | Acesso público |
-| `/dashboard` | Listagem de posts | Acesso protegido (usuário logado) |
-| `/post/:id` | Visualização individual de post | Acesso protegido |
-| `/post/new` | Criação de novo post | Acesso protegido |
+## 🔑 Funcionalidades
+- ✅ Cadastro de novos usuários
+- ✅ Login com e-mail e senha
+- ✅ Autenticação com Google (OAuth)
+- ✅ Validação de senha com mensagens de erro claras
+- ✅ Logout seguro
+- ✅ Enterface responsiva com **CSS Modules**
+- ✅ Estrutura de código organizada com hooks personalizados
+- ✅ Publicação automática com Firebase Hosting
 
 ---
 
-### 3. Construção da Dashboard
+### 🔐 Detalhes da Autenticação
 
-- Crie uma página `Dashboard.jsx`:
-  - Liste **todos os posts** em cards ou em lista.
-  - Cada card deve ter:
-    - Título do post
-    - Autor (se possível)
-    - Link para visualizar o post completo (`/post/:id`).
+A autenticação de usuários é feita com o Firebase, utilizando os seguintes métodos:
 
-- Utilize **Hooks** para buscar os dados:
-  - `useEffect` para puxar os posts ao carregar a página.
-  - `useState` para armazenar a lista de posts.
+- 📩 **Cadastro:** `createUserWithEmailAndPassword`
+- ✏️ **Atualização de perfil:** `updateProfile`
+- 🔐 **Login tradicional:** `signInWithEmailAndPassword`
+- 🌐 **Login via Google:** `signInWithPopup` + `GoogleAuthProvider`
 
 ---
 
-### 4. Construção da Página de Criação de Postagem
+### 🎨 Estilização
 
-- Crie uma página `CreatePost.jsx`:
-  - Formulário com campos para:
-    - Título
-    - Conteúdo
-  - Botão **Salvar**.
-  - Ao enviar, crie o novo post no **Firebase** ou no contexto/local que esteja usando para simulação.
-
-- Dica prática:
-  - Use `useState` para controlar os campos do formulário.
-  - Use `useContext` ou chamadas diretas para atualizar a lista de posts ao salvar.
+- Estilização feita com **CSS Modules** para encapsulamento e reutilização de estilos
+- Layout responsivo adaptado para mobile e desktop
+- Feedback visual em botões
 
 ---
 
-### 5. Sistema de Login (Firebase OAuth)
+### 📦 Deploy no Firebase Hosting
 
-- Implemente o **login via Firebase Authentication**.
-- Métodos obrigatórios:
-  - Login com **Google** (padrão).
-- Mantenha conexão com o Firebase durante a sessão do usuário.
+Para publicar a aplicação, foram utilizados os seguintes comandos:
 
 ---
 
-### 6. Controle de Acesso (Proteção de Rotas)
+# Instalar dependências
+npm install
 
-- Utilize um `PrivateRoute` (ou configuração equivalente) para proteger:
-  - `/dashboard`
-  - `/post/:id`
-  - `/post/new`
+# Gerar build de produção
+npm run build
 
-- Usuário **não logado** deve ser redirecionado para `/login`.
+# Login no Firebase CLI
+firebase login
 
----
+# Inicializar projeto Firebase (responder com "dist" como pasta pública)
+firebase init
 
-### 7. Menu de Navegação Condicional
-
-- Ajuste o menu para:
-  - Exibir apenas **Login** quando o usuário não estiver autenticado.
-  - Exibir **Dashboard**, **Novo Post**, **Logout** quando estiver logado.
+# Realizar o deploy
+firebase deploy
 
 ---
 
-### 8. Configuração de Pipeline e Deploy
-
-- Configure o deploy automático usando **GitHub Actions** ou plataformas como **Vercel**, **Netlify** ou **Firebase Hosting**:
-  - Após o push para a branch de entrega, o sistema deve ser publicado automaticamente.
-  - Deve ser possível acessar o sistema por link público.
-
----
-
-## ⚙️ Dicas Técnicas para os Hooks
-
-- **useState**:
-  ```javascript
-  const [posts, setPosts] = useState([]);
-  ```
-
-- **useEffect** para buscar posts:
-  ```javascript
-  useEffect(() => {
-    // Função para buscar posts aqui
-  }, []);
-  ```
-
-- **useContext** para controle global de autenticação:
-  - Criar um `AuthContext`.
-  - Fornecer informações de login para todo o app.
-
-- **Redirecionamento Condicional**:
-  ```javascript
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
-  ```
-
-- **Proteção de Rotas** usando `Outlet`:
-  ```javascript
-  const PrivateRoute = () => {
-    return user ? <Outlet /> : <Navigate to="/login" />;
-  }
-  ```
+### 👨‍💻 Informações do Aluno
+Nome: Pedro Ferreira Leite
+GitHub: PedroFerreiraLeite
+Curso: Desenvolvimento de Software Multiplataforma
+Professor: Victor Icoma
 
 ---
 
-## 📌 Entrega
-
-Você deve entregar:
-
-1. **Link da Branch** `avaliacaodw-seulogindogithub`
-2. **Link do Deploy Funcionando** para teste público
-3. **Pipeline CodeQL** rodando no GitHub Actions
-
----
-
-## 📅 Avaliação
-
-Serão avaliados:
-
-- Organização e Estrutura do Código
-- Funcionamento das Rotas e Autenticação
-- Funcionalidade da Dashboard e Criação de Postagem
-- Deploy público funcional
-- Qualidade geral do repositório e uso correto de boas práticas
-
----
-
-# 🚀 Bons estudos e boa sorte!  
-*"O código que você escreve hoje é a carta que você envia para o seu eu do futuro. Capriche."* 📜🚀
-
+testes concluídos:
+![Captura de tela 2025-05-09 233749](https://github.com/user-attachments/assets/0585f6b6-11e9-4af6-86e1-8d032d153c2f)
