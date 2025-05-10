@@ -8,9 +8,15 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
 
-    const { login, error: authError, loading } = useAuthentication()
+    const { login, loginWithGoogle, error: authError, loading } = useAuthentication()
 
-    const handlerSubmit = async (e) => {
+    const handleGoogleLogin = async () => {
+        setError("")
+        const res=await loginWithGoogle()
+        console.log(res)
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         setError("")
@@ -35,7 +41,7 @@ const Login = () => {
         <div className={styles.login}>
             <h1>Entrar</h1>
             <p>Faça login em nossa plataforma de desenvolvedores</p>
-            <form onSubmit={handlerSubmit}>
+            <form onSubmit={handleSubmit}>
                 <label>
                     <span>E-mail: </span>
                     <input
@@ -62,6 +68,19 @@ const Login = () => {
                 {loading && <button className='btn' disabled>Aguarde... </button>}
                 {error && <p>{error}</p>}
             </form>
+            <div className={styles.googleLogin}>
+                <button className={`${styles.googleButton} btn`} onClick={handleGoogleLogin}>
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                    alt="Google logo"
+                    style={{
+                        width: "20px",
+                        marginRight: "10px",
+                        verticalAlign:"middle",
+                    }}
+                />
+                Entrar com Google
+                </button>
+            </div>
         </div>
     )
 }
