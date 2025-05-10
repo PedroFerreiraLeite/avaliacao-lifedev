@@ -16,7 +16,7 @@ import Post from "./pages/Post/Post";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import CreatePost from "./pages/CreatePost/CreatePost";
-import Search from "./pages/Search/search";
+import Search from "./pages/Search/Search";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Dashboard from "./pages/Dashboard/Dashboard";
